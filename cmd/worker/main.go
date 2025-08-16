@@ -6,8 +6,8 @@ import (
     "os"
     "os/signal"
     
-    "taskflow/internal/queue"
-    "taskflow/internal/worker"
+    "golang-dtqs/internal/queue"
+    "golang-dtqs/internal/worker"
 )
 
 func main() {
