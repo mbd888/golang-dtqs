@@ -17,6 +17,6 @@ Will use Redis for queue storage and Go workers for processing.
 
 - [x] Basic task structure
 - [x] Redis queue implementation
-- [ ] Worker pool
-- [ ] HTTP API
+- [x] Worker pool
+- [x] HTTP API
 - [ ] Docker support
