@@ -21,7 +21,7 @@ golang-dtqs provides a robust, Redis-backed task queue solution that enables dis
 - **Health Monitoring** - Built-in metrics and health check endpoints
 - **Graceful Shutdown** - Safe worker termination without task loss
 
-**Components:**
+### Components
 - **Redis**: Centralized queue storage, task persistence, and pub/sub messaging
 - **HTTP API Server**: RESTful interface for task submission and system management
 - **Worker Pool**: Distributed Go workers for parallel task processing
