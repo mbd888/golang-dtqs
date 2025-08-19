@@ -6,6 +6,7 @@ import (
     "log"
     "net/http"
     "os"
+    "strings"
 
     "golang-dtqs/internal/queue"
     "golang-dtqs/internal/task"
@@ -32,6 +33,7 @@ func main() {
     http.HandleFunc("/", rootHandler)
     http.HandleFunc("/health", healthHandler)
     http.HandleFunc("/tasks", loggingMiddleware(tasksHandler))
+    http.HandleFunc("/tasks/", loggingMiddleware(taskHandler))
 
     // Port from env or default
     port := os.Getenv("PORT")
@@ -64,6 +66,38 @@ func tasksHandler(w http.ResponseWriter, r *http.Request) {
     }
 }
 
+// Get single task by ID
+func taskHandler(w http.ResponseWriter, r *http.Request) {
+    if r.Method != http.MethodGet {
+        http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+        return
+    }
+    
+    // Extract ID from path /tasks/{id}
+    parts := strings.Split(r.URL.Path, "/")
+    if len(parts) != 3 || parts[2] == "" {
+        http.Error(w, "Invalid task ID", http.StatusBadRequest)
+        return
+    }
+    
+    taskID := parts[2]
+    
+    // Get task from queue
+    t, err := q.Get(r.Context(), taskID)
+    if err != nil {
+        if err == queue.ErrTaskNotFound {
+            http.Error(w, "Task not found", http.StatusNotFound)
+        } else {
+            log.Printf("Error getting task %s: %v", taskID, err)
+            http.Error(w, "Internal server error", http.StatusInternalServerError)
+        }
+        return
+    }
+    
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(t)
+}
+
 // Create task handler
 func createTask(w http.ResponseWriter, r *http.Request) {
     var req struct {
@@ -79,6 +113,7 @@ func createTask(w http.ResponseWriter, r *http.Request) {
     t := task.New(req.Type, req.Payload)
 
     if err := q.Enqueue(r.Context(), t); err != nil {
+        log.Printf("Failed to enqueue task: %v", err)
         http.Error(w, "Failed to enqueue task", http.StatusInternalServerError)
         return
     }
