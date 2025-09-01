@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
-	"golang-dtqs/internal/queue"
-	"golang-dtqs/internal/task"
+	"dtqs/internal/queue"
+	"dtqs/internal/task"
 )
 
 var q queue.Queue

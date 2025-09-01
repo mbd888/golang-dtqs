@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"syscall"
 
-	"golang-dtqs/internal/queue"
-	"golang-dtqs/internal/worker"
+	"dtqs/internal/queue"
+	"dtqs/internal/worker"
 )
 
 func main() {

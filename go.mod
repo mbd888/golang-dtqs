@@ -1,4 +1,4 @@
-module golang-dtqs
+module dtqs
 
 go 1.21
 

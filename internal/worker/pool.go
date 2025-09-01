@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	"golang-dtqs/internal/queue"
+	"dtqs/internal/queue"
 )
 
 type Pool struct {

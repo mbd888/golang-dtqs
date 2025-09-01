@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"golang-dtqs/internal/task"
+	"dtqs/internal/task"
 
 	"github.com/redis/go-redis/v9"
 )

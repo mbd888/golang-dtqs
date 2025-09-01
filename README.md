@@ -1,10 +1,10 @@
-# golang-dtqs
+# dtqs
 
 A high-performance distributed task queue system built with Go and Redis, designed for scalable background job processing in microservices architectures.
 
 ## Overview
 
-golang-dtqs provides a robust, Redis-backed task queue solution that enables distributed processing of background jobs with built-in reliability features. The system is designed to handle high-throughput workloads while maintaining fault tolerance and horizontal scalability.
+dtqs provides a robust, Redis-backed task queue solution that enables distributed processing of background jobs with built-in reliability features. The system is designed to handle high-throughput workloads while maintaining fault tolerance and horizontal scalability.
 
 ## Key Features
 
